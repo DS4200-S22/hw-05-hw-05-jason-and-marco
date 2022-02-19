@@ -8,7 +8,7 @@ const svg1 = d3.select("#vis-holder")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]); 
+                .attr("viewBox", [0, 0, width, height]);
 
 // Initialize brush for Scatterplot1 and points. We will need these to be global. 
 let brush1; 
@@ -20,7 +20,18 @@ const svg2 = d3.select("#vis-holder")
                 .append("svg")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]);
+                .attr("viewBox", [0, 0, width, height])
+    .attr("id", "brush");
+
+  // Selecting SVG element
+  d3.select("#brush")
+  // Creating a brush using the
+  // d3.brush function
+  .call( d3.brush()
+  // Initialise the brush area: start at
+  // 0,0 and finishes at given width,height
+  .extent( [ [0,0], [600,600] ] )
+)
 
 //TODO: Initialize brush for Scatterplot2 and points. We will need these to be global.
 let brush2;
@@ -178,7 +189,8 @@ d3.csv("data/iris.csv").then((data) => {
 
   //TODO: Barchart with counts of different species
   {
-    // Bar chart code here 
+    // Bar chart code here
+
   }
 
   //Brushing Code---------------------------------------------------------------------------------------------
