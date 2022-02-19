@@ -1,5 +1,7 @@
+console.log("message")
+
 // Set margins and dimensions 
-const margin = {top: 50, right: 50, bottom: 50, left: 200};
+const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 900; //- margin.left - margin.right;
 const height = 650; //- margin.top - margin.bottom;
 
@@ -8,8 +10,7 @@ const svg1 = d3.select("#vis-holder")
     .append("svg")
     .attr("width", width - margin.left - margin.right)
     .attr("height", height - margin.top - margin.bottom)
-    .attr("viewBox", [0, 0, width, height])
-    .attr("id", "brush");
+    .attr("viewBox", [0, 0, width, height]);
 
 // Initialize brush for Scatterplot1 and points. We will need these to be global. 
 let brush1;
@@ -21,8 +22,7 @@ const svg2 = d3.select("#vis-holder")
     .append("svg")
     .attr("width", width - margin.left - margin.right)
     .attr("height", height - margin.top - margin.bottom)
-    .attr("viewBox", [0, 0, width, height])
-    .attr("id", "brush");
+    .attr("viewBox", [0, 0, width, height]);
 
 // // Selecting SVG element
 // d3.select("#brush")
@@ -114,7 +114,7 @@ d3.csv("data/iris.csv").then((data) => {
             );
 
         // Add points
-        const myCircles1 = svg1.selectAll("circle")
+        var myCircles1 = svg1.selectAll("circle")
             .data(data)
             .enter()
             .append("circle")
@@ -129,26 +129,20 @@ d3.csv("data/iris.csv").then((data) => {
 
         brush1 = d3.brush()
 
-        // Selecting SVG element
-d3.select("#brush")
-    // Creating a brush using the
-    // d3.brush function
-    .call(brush1
-        // Initialise the brush area: start at
-        // 0,0 and finishes at given width,height
-        .extent([[0, 0], [width, height]])
-        .on("start brush", updateChart1)
-    )
-
         //TODO: Add brush1 to svg1
 
+        // svg1.call(brush1.extent([[0, 0], [width, height]])
+        //     .on("brush", updateChart1))
+        svg1.call(brush1
+        .on("brush", console.log("brushing")))
+        .extent([[0, 0], [width, height]])
 
-// // Add brushing
-// d3.select("brush")
-//     .call(brush1              // Add the brush feature using the d3.brush function
-//         .extent([[0, 0], [width, height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-//         .on("start brush", updateChart1) // Each time the brush selection changes, trigger the 'updateChart' function
-//     )
+        // // Add brushing
+        // d3.select("brush")
+        //     .call(brush1              // Add the brush feature using the d3.brush function
+        //         .extent([[0, 0], [width, height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+        //         .on("start brush", updateChart1) // Each time the brush selection changes, trigger the 'updateChart' function
+        //     )
     }
 
     //TODO: Scatterplot 2 (show Sepal width on x-axis and Petal width on y-axis)
@@ -233,6 +227,10 @@ d3.select("#brush")
 
     // Call when Scatterplot1 is brushed
     function updateChart1(brushEvent) {
+        console.log("Updating chart 1")
+
+        extent = d3.event.selection
+        myCircles1.classed("selected", function (d) { return isBrushed(extent, x(d.Sepal_Length), y(d.Petal_Length)) })
 
         //TODO: Find coordinates of brushed region
 
