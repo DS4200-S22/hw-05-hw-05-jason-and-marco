@@ -1,5 +1,3 @@
-console.log("message")
-
 // Set margins and dimensions 
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 900; //- margin.left - margin.right;
@@ -222,7 +220,7 @@ d3.csv("data/iris.csv").then((data) => {
 
         //TODO: Find coordinates of brushed region
 
-        let coordinates = d3.brushSelection(brushEvent);
+        let coordinates = d3.brushSelection(this);
         console.log(coordinates);
         // var coordinates = brushEvent
 
