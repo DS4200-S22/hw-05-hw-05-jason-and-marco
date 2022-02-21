@@ -24,18 +24,9 @@ const svg2 = d3.select("#vis-holder")
     .attr("height", height - margin.top - margin.bottom)
     .attr("viewBox", [0, 0, width, height]);
 
-// // Selecting SVG element
-// d3.select("#brush")
-//     // Creating a brush using the
-//     // d3.brush function
-//     .call(d3.brush()
-//         // Initialise the brush area: start at
-//         // 0,0 and finishes at given width,height
-//         .extent([[0, 0], [width, height]])
-//     )
-
 //TODO: Initialize brush for Scatterplot2 and points. We will need these to be global.
 let brush2;
+let myCircles2;
 
 //TODO: append svg object to the body of the page to house bar chart
 const svg3 = d3.select("#vis-holder")
@@ -114,7 +105,7 @@ d3.csv("data/iris.csv").then((data) => {
             );
 
         // Add points
-        var myCircles1 = svg1.selectAll("circle")
+        myCircles1 = svg1.selectAll("circle")
             .data(data)
             .enter()
             .append("circle")
@@ -193,7 +184,7 @@ d3.csv("data/iris.csv").then((data) => {
             );
 
         // Add points
-        const myCircles2 = svg2.selectAll("circle")
+        myCircles2 = svg2.selectAll("circle")
             .data(data)
             .enter()
             .append("circle")
