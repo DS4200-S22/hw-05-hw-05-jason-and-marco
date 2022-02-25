@@ -122,17 +122,6 @@ d3.csv("data/iris.csv").then((data) => {
 
         svg1.call(brush1
             .on("start brush", updateChart1));
-
-        // add event listeners
-
-        // on mouseover event, call mouseover function
-        // svg1.selectAll("circle")
-        // .on("mouseover", mouseover)
-        // .on("mouseout", mouseout3)
-
-
-        // svg1.call(brush1.extent([[0, 0], [width, height]])
-        //     .on("start brush", console.log(brush1)))
     }
 
     //TODO: Scatterplot 2 (show Sepal width on x-axis and Petal width on y-axis)

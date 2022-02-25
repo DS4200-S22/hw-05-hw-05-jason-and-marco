@@ -8,11 +8,3 @@ body {
   stroke: black;
   stroke-width: 4px;
 }
-
-.myFirstPlot {
-  fill:  DarkCyan;
-}
-
-.highlighted {
-  fill:  orange;
-}
