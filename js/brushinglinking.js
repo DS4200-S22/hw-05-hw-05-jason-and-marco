@@ -116,13 +116,19 @@ d3.csv("data/iris.csv").then((data) => {
 
         //TODO: Define a brush (call it brush1)
 
-        brush1 = d3.brush();
+        brush1 = d3.brush().extent([[0, 0], [width, height]]);
 
         //TODO: Add brush1 to svg1
 
         svg1.call(brush1
-            .extent([[0, 0], [width, height]])
-            .on("start brush", updateChart1(brush1)));
+            .on("start brush", updateChart1));
+
+        // add event listeners
+
+        // on mouseover event, call mouseover function
+        // svg1.selectAll("circle")
+        // .on("mouseover", mouseover)
+        // .on("mouseout", mouseout3)
 
 
         // svg1.call(brush1.extent([[0, 0], [width, height]])
