@@ -217,19 +217,16 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call when Scatterplot1 is brushed
     function updateChart1(brushEvent) {
-        console.log("Updating chart 1");
+        // console.log("Updating chart 1");
 
         //TODO: Find coordinates of brushed region
 
         let coordinates = d3.brushSelection(this);
-        console.log(coordinates);
+        // console.log(coordinates);
 
         //TODO: Give bold outline to all points within the brush region in Scatterplot1
 
         myCircles1.classed("selected", function (d) { 
-            console.log(x1(d.Sepal_Length))
-            console.log(y1(d.Petal_Length))
-            console.log(isBrushed(coordinates, d.Sepal_Length, d.Petal_Length));
             return isBrushed(coordinates, x1(d.Sepal_Length), y1(d.Petal_Length))
          })
 
