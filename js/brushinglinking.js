@@ -62,7 +62,7 @@ d3.csv("data/iris.csv").then((data) => {
         });
 
         // Create X scale
-        let x1 = d3.scaleLinear()
+        x1 = d3.scaleLinear()
             .domain([0, maxX1])
             .range([margin.left, width - margin.right]);
 
@@ -85,7 +85,7 @@ d3.csv("data/iris.csv").then((data) => {
         });
 
         // Create Y scale
-        let y1 = d3.scaleLinear()
+        y1 = d3.scaleLinear()
             .domain([0, maxY1])
             .range([height - margin.bottom, margin.top]);
 
@@ -219,20 +219,19 @@ d3.csv("data/iris.csv").then((data) => {
     function updateChart1(brushEvent) {
         console.log("Updating chart 1");
 
-        // extent = d3.event.selection
-        // myCircles1.classed("selected", function (d) { return isBrushed(extent, x(d.Sepal_Length), y(d.Petal_Length)) })
-        // myCircles1.classed("selected", function (d) { return isBrushed(brushEvent, x(d.Sepal_Length), y(d.Petal_Length)) })
-
-
         //TODO: Find coordinates of brushed region
 
         let coordinates = d3.brushSelection(this);
         console.log(coordinates);
-        // var coordinates = brushEvent
 
         //TODO: Give bold outline to all points within the brush region in Scatterplot1
 
-        myCircles1.classed("selected", function (d) { return isBrushed(coordinates, d.Sepal_Length, d.Petal_Length) })
+        myCircles1.classed("selected", function (d) { 
+            console.log(x1(d.Sepal_Length))
+            console.log(y1(d.Petal_Length))
+            console.log(isBrushed(coordinates, d.Sepal_Length, d.Petal_Length));
+            return isBrushed(coordinates, x1(d.Sepal_Length), y1(d.Petal_Length))
+         })
 
         //TODO: Give bold outline to all points in Scatterplot2 corresponding to points within the brush region in Scatterplot1
 
