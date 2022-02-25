@@ -232,6 +232,9 @@ d3.csv("data/iris.csv").then((data) => {
 
         //TODO: Give bold outline to all points in Scatterplot2 corresponding to points within the brush region in Scatterplot1
 
+        myCircles2.classed("selected", function (d) { 
+            return isBrushed(coordinates, x1(d.Sepal_Length), y1(d.Petal_Length))
+         })
     }
 
     // Call when Scatterplot2 is brushed
