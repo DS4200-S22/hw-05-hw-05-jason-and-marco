@@ -6,7 +6,7 @@ body {
 .selected {
   opacity: 1 !important;
   stroke: black;
-  stroke-width: 5px;
+  stroke-width: 4px;
 }
 
 .myFirstPlot {
