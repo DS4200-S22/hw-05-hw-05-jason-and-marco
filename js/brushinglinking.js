@@ -136,7 +136,7 @@ d3.csv("data/iris.csv").then((data) => {
         });
 
         // Create X scale
-        let x2 = d3.scaleLinear()
+        x2 = d3.scaleLinear()
             .domain([0, maxX2])
             .range([margin.left, width - margin.right]);
 
@@ -159,7 +159,7 @@ d3.csv("data/iris.csv").then((data) => {
         });
 
         // Create Y scale
-        let y2 = d3.scaleLinear()
+        y2 = d3.scaleLinear()
             .domain([0, maxY2])
             .range([height - margin.bottom, margin.top]);
 
@@ -187,6 +187,15 @@ d3.csv("data/iris.csv").then((data) => {
             .attr("r", 8)
             .style("fill", (d) => color(d.Species))
             .style("opacity", 0.5);
+
+                    //TODO: Define a brush (call it brush1)
+
+        brush2 = d3.brush().extent([[0, 0], [width, height]]);
+
+        //TODO: Add brush1 to svg1
+
+        svg2.call(brush2
+            .on("start brush", updateChart2));
     }
 
     //TODO: Barchart with counts of different species
@@ -202,6 +211,7 @@ d3.csv("data/iris.csv").then((data) => {
         svg1.call(brush1.move, null);
 
         //TODO: add code to clear existing brush from svg2
+        svg2.call(brush2.move, null);
     }
 
     // Call when Scatterplot1 is brushed
@@ -230,12 +240,19 @@ d3.csv("data/iris.csv").then((data) => {
     function updateChart2(brushEvent) {
 
         //TODO: Find coordinates of brushed region
+        let coordinates = d3.brushSelection(this);
 
         //TODO: Start an empty set that you can store names of selected species in
 
         //TODO: Give bold outline to all points within the brush region in Scatterplot2 & collected names of brushed species
+        myCircles2.classed("selected", function (d) { 
+            return isBrushed(coordinates, x2(d.Sepal_Width), y2(d.Petal_Width))
+         })
 
         //TODO: Give bold outline to all points in Scatterplot1 corresponding to points within the brush region in Scatterplot2
+        myCircles1.classed("selected", function (d) { 
+            return isBrushed(coordinates, x2(d.Sepal_Width), y2(d.Petal_Width))
+         })
 
         //TODO: Give bold outline to all bars in bar chart with corresponding to species selected by Scatterplot2 brush
 
