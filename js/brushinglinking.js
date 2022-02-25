@@ -243,6 +243,7 @@ d3.csv("data/iris.csv").then((data) => {
         let coordinates = d3.brushSelection(this);
 
         //TODO: Start an empty set that you can store names of selected species in
+        let selectedSpecies = new Set();
 
         //TODO: Give bold outline to all points within the brush region in Scatterplot2 & collected names of brushed species
         myCircles2.classed("selected", function (d) { 
