@@ -1,7 +1,7 @@
 // Set margins and dimensions 
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
-const width = 870; //- margin.left - margin.right;
-const height = 650; //- margin.top - margin.bottom;
+const width = 900 - margin.left - margin.right;
+const height = 650 - margin.top - margin.bottom;
 
 // Append svg object to the body of the page to house Scatterplot1
 const svg1 = d3.select("#vis-holder")
@@ -266,12 +266,10 @@ d3.csv("data/iris.csv").then((data) => {
     // Call when Scatterplot1 is brushed
     function updateChart1(brushEvent) {
         // clear();
-        // console.log("Updating chart 1");
 
         //TODO: Find coordinates of brushed region
 
         let coordinates = d3.brushSelection(this);
-        // console.log(coordinates);
 
         //TODO: Give bold outline to all points within the brush region in Scatterplot1
 
