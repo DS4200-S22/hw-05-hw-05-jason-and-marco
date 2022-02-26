@@ -204,16 +204,14 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Hardcoded barchart data
     const bar_data = [
-        {species: 'setosa', count: 50},
-        {species: 'versicolor', count: 50},
-        {species: 'virginica', count: 50}
+        {Species: 'setosa', Count: 50},
+        {Species: 'versicolor', Count: 50},
+        {Species: 'virginica', Count: 50}
     ];
-
-    console.log(bar_data);
 
             // TODO: What does this code do?
     // This code finds the maximum score in the d2 dataset and stores it in the maxY2 variable
-    let maxY3 = d3.max(bar_data, function(d) { return d.count; });
+    let maxY3 = d3.max(bar_data, function(d) { return d.Count; });
 
     // TODO: What does each line of this code do? 
     // This creates the y scale by establishing constaints for the domain and range
@@ -238,7 +236,7 @@ d3.csv("data/iris.csv").then((data) => {
     svg3.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`) 
         .call(d3.axisBottom(xScale3) 
-                .tickFormat(i => bar_data[i].species))  
+                .tickFormat(i => bar_data[i].Species))  
         .attr("font-size", '20px'); 
 
 
@@ -248,9 +246,11 @@ d3.csv("data/iris.csv").then((data) => {
     .append("rect") 
         .attr("class", "bar") 
         .attr("x", (d,i) => xScale3(i)) 
-        .attr("y", (d) => yScale3(d.count)) 
-        .attr("height", (d) => (height - margin.bottom) - yScale3(d.count)) 
-        .attr("width", xScale3.bandwidth());
+        .attr("y", (d) => yScale3(d.Count)) 
+        .attr("height", (d) => (height - margin.bottom) - yScale3(d.Count)) 
+        .attr("width", xScale3.bandwidth())
+        .style("fill", (d) => color(d.Species))
+        .style("opacity", 0.5);
     //   .on("mouseover", mouseover1) 
     //   .on("mousemove", mousemove1)
     //   .on("mouseleave", mouseleave1);
@@ -269,7 +269,7 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call when Scatterplot1 is brushed
     function updateChart1(brushEvent) {
-        clear();
+        // clear();
         // console.log("Updating chart 1");
 
         //TODO: Find coordinates of brushed region
@@ -292,7 +292,7 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call when Scatterplot2 is brushed
     function updateChart2(brushEvent) {
-        clear();
+        // clear();
 
         //TODO: Find coordinates of brushed region
         let coordinates = d3.brushSelection(this);
