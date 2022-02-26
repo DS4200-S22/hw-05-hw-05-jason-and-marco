@@ -201,6 +201,13 @@ d3.csv("data/iris.csv").then((data) => {
     //TODO: Barchart with counts of different species
     {
         // Bar chart code here
+
+    // Hardcoded barchart data
+    const bar_data = [
+        {species: 'setosa', count: 50},
+        {species: 'versicolor', count: 50},
+        {species: 'virginica', count: 50}
+    ];
             // TODO: What does this code do?
     // This code finds the maximum score in the d2 dataset and stores it in the maxY2 variable
     let maxY3 = 50;
