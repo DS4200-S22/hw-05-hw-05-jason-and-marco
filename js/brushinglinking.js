@@ -208,51 +208,52 @@ d3.csv("data/iris.csv").then((data) => {
         {species: 'versicolor', count: 50},
         {species: 'virginica', count: 50}
     ];
+
+    console.log(bar_data);
+
             // TODO: What does this code do?
     // This code finds the maximum score in the d2 dataset and stores it in the maxY2 variable
-    let maxY3 = 50;
+    let maxY3 = d3.max(bar_data, function(d) { return d.count; });
 
     // TODO: What does each line of this code do? 
     // This creates the y scale by establishing constaints for the domain and range
     let yScale3 = d3.scaleLinear()
-                .domain([0,50])
+                .domain([0,maxY3])
                 .range([height-margin.bottom,margin.top]); 
 
     // TODO: What does each line of this code do? 
     // Creates an offset scale that is centered on each bar
     let xScale3 = d3.scaleBand()
-                .domain(d3.range(3))
+                .domain(d3.range(bar_data.length))
                 .range([margin.left, width - margin.right])
                 .padding(0.2); 
 
-    svg2.selectAll(".bar") 
-    .data(data3) 
-    .enter()  
-    .append("rect") 
-      .attr("class", "bar") 
-      .attr("x", (d,i) => xScale2(i)) 
-      .attr("y", (d) => yScale2(d.score)) 
-      .attr("height", (d) => (height - margin.bottom) - yScale2(d.score)) 
-      .attr("width", xScale2.bandwidth()) 
-      .on("mouseover", mouseover2) 
-      .on("mousemove", mousemove2)
-      .on("mouseleave", mouseleave2);
-
-
-    // TODO: What does each line of this code do?  
-    // Adds the y scale to the visualization
-    svg2.append("g")
-      .attr("transform", `translate(${margin.left}, 0)`) 
-      .call(d3.axisLeft(yScale3)) 
-      .attr("font-size", '20px'); 
-
+    svg3.append("g")
+    .attr("transform", `translate(${margin.left}, 0)`) 
+    .call(d3.axisLeft(yScale3)) 
+    .attr("font-size", '20px'); 
+    
     // TODO: What does each line of this code do? 
     // Adds the x scale to the visualization
-    svg2.append("g")
+    svg3.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`) 
         .call(d3.axisBottom(xScale3) 
-                .tickFormat(i => data2[i].name))  
+                .tickFormat(i => bar_data[i].species))  
         .attr("font-size", '20px'); 
+
+
+    svg3.selectAll(".bar") 
+    .data(bar_data) 
+    .enter()  
+    .append("rect") 
+        .attr("class", "bar") 
+        .attr("x", (d,i) => xScale3(i)) 
+        .attr("y", (d) => yScale3(d.count)) 
+        .attr("height", (d) => (height - margin.bottom) - yScale3(d.count)) 
+        .attr("width", xScale3.bandwidth());
+    //   .on("mouseover", mouseover1) 
+    //   .on("mousemove", mousemove1)
+    //   .on("mouseleave", mouseleave1);
 
     }
 
