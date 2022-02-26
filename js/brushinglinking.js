@@ -236,7 +236,7 @@ d3.csv("data/iris.csv").then((data) => {
         .attr("font-size", '20px'); 
 
 
-    svg3.selectAll(".bar") 
+    bars = svg3.selectAll(".bar") 
     .data(bar_data) 
     .enter()  
     .append("rect") 
@@ -311,10 +311,10 @@ d3.csv("data/iris.csv").then((data) => {
             return isBrushed(coordinates, x2(d.Sepal_Width), y2(d.Petal_Width));
          })
 
-
-
         //TODO: Give bold outline to all bars in bar chart with corresponding to species selected by Scatterplot2 brush
-         console.log(selectedSpecies);
+        bars.classed("selected", function (d) { 
+            return selectedSpecies.has(d.Species);
+         })
     }
 
     //Finds dots within the brushed region
