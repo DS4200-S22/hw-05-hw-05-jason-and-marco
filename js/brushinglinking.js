@@ -128,8 +128,8 @@ d3.csv("data/iris.csv").then((data) => {
     //TODO: Scatterplot 2 (show Sepal width on x-axis and Petal width on y-axis)
     {
         // Scatterplot2 code here
-        let xKey2 = "Sepal_Width";
-        let yKey2 = "Petal_Width";
+        xKey2 = "Sepal_Width";
+        yKey2 = "Petal_Width";
 
         // Find max x
         let maxX2 = d3.max(data, (d) => {
@@ -207,51 +207,44 @@ d3.csv("data/iris.csv").then((data) => {
         {Species: 'virginica', Count: 50}
     ];
 
-            // TODO: What does this code do?
-    // This code finds the maximum score in the d2 dataset and stores it in the maxY2 variable
-    let maxY3 = d3.max(bar_data, function(d) { return d.Count; });
+        // Find the maximum count in the bar_data dataset and stores it in the maxY3 variable
+        let maxY3 = d3.max(bar_data, function(d) { return d.Count; });
 
-    // TODO: What does each line of this code do? 
-    // This creates the y scale by establishing constaints for the domain and range
-    let yScale3 = d3.scaleLinear()
+        // Create the y scale by establishing constaints for the domain and range
+        y3 = d3.scaleLinear()
                 .domain([0,maxY3])
                 .range([height-margin.bottom,margin.top]); 
 
-    // TODO: What does each line of this code do? 
-    // Creates an offset scale that is centered on each bar
-    let xScale3 = d3.scaleBand()
+        // Create an offset scale that is centered on each bar
+        x3 = d3.scaleBand()
                 .domain(d3.range(bar_data.length))
                 .range([margin.left, width - margin.right])
                 .padding(0.2); 
 
-    svg3.append("g")
-    .attr("transform", `translate(${margin.left}, 0)`) 
-    .call(d3.axisLeft(yScale3)) 
-    .attr("font-size", '20px'); 
-    
-    // TODO: What does each line of this code do? 
-    // Adds the x scale to the visualization
-    svg3.append("g")
-        .attr("transform", `translate(0,${height - margin.bottom})`) 
-        .call(d3.axisBottom(xScale3) 
-                .tickFormat(i => bar_data[i].Species))  
+        svg3.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`) 
+        .call(d3.axisLeft(y3)) 
         .attr("font-size", '20px'); 
+        
+        // Add the x scale to the visualization
+        svg3.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`) 
+            .call(d3.axisBottom(x3) 
+                    .tickFormat(i => bar_data[i].Species))  
+            .attr("font-size", '20px'); 
 
 
-    bars = svg3.selectAll(".bar") 
-    .data(bar_data) 
-    .enter()  
-    .append("rect") 
-        .attr("class", "bar") 
-        .attr("x", (d,i) => xScale3(i)) 
-        .attr("y", (d) => yScale3(d.Count)) 
-        .attr("height", (d) => (height - margin.bottom) - yScale3(d.Count)) 
-        .attr("width", xScale3.bandwidth())
-        .style("fill", (d) => color(d.Species))
-        .style("opacity", 0.5);
-    //   .on("mouseover", mouseover1) 
-    //   .on("mousemove", mousemove1)
-    //   .on("mouseleave", mouseleave1);
+        bars = svg3.selectAll(".bar") 
+        .data(bar_data) 
+        .enter()  
+        .append("rect") 
+            .attr("class", "bar") 
+            .attr("x", (d,i) => x3(i)) 
+            .attr("y", (d) => y3(d.Count)) 
+            .attr("height", (d) => (height - margin.bottom) - y3(d.Count)) 
+            .attr("width", x3.bandwidth())
+            .style("fill", (d) => color(d.Species))
+            .style("opacity", 0.5);
 
     }
 
@@ -259,7 +252,6 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call to removes existing brushes
     function clear() {
-        // svg1.call(brush1.move, null);
         svg1.call(brush1.move, null);
         // //TODO: add code to clear existing brush from svg2
         svg2.call(brush2.move, null);
