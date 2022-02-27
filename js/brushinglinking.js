@@ -207,8 +207,11 @@ d3.csv("data/iris.csv").then((data) => {
         {Species: 'virginica', Count: 50}
     ];
 
+        xKey3 = 'Species';
+        yKey3 = 'Count';
+
         // Find the maximum count in the bar_data dataset and stores it in the maxY3 variable
-        let maxY3 = d3.max(bar_data, function(d) { return d.Count; });
+        let maxY3 = d3.max(bar_data, function(d) { return d[yKey3]; });
 
         // Create the y scale by establishing constaints for the domain and range
         y3 = d3.scaleLinear()
@@ -224,14 +227,28 @@ d3.csv("data/iris.csv").then((data) => {
         svg3.append("g")
         .attr("transform", `translate(${margin.left}, 0)`) 
         .call(d3.axisLeft(y3)) 
-        .attr("font-size", '20px'); 
+        .attr("font-size", '20px')
+        .call((g) => g.append("text")
+            .attr("x", 0)
+            .attr("y", margin.top)
+            .attr("fill", "black")
+            .attr("text-anchor", "end")
+            .text(yKey3)
+        ); 
         
         // Add the x scale to the visualization
         svg3.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`) 
             .call(d3.axisBottom(x3) 
                     .tickFormat(i => bar_data[i].Species))  
-            .attr("font-size", '20px'); 
+            .attr("font-size", '20px')
+            .call((g) => g.append("text")
+                .attr("x", width - margin.right)
+                .attr("y", margin.bottom - 4)
+                .attr("fill", "black")
+                .attr("text-anchor", "end")
+                .text(xKey3)
+            ); 
 
 
         bars = svg3.selectAll(".bar") 
