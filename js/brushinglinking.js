@@ -121,7 +121,8 @@ d3.csv("data/iris.csv").then((data) => {
         //TODO: Add brush1 to svg1
 
         svg1.call(brush1
-            .on("start brush", updateChart1));
+            .on("start", clear)
+            .on("brush", updateChart1));
     }
 
     //TODO: Scatterplot 2 (show Sepal width on x-axis and Petal width on y-axis)
@@ -191,7 +192,8 @@ d3.csv("data/iris.csv").then((data) => {
         brush2 = d3.brush().extent([[0, 0], [width, height]]);
 
         svg2.call(brush2
-            .on("start brush", updateChart2));
+            .on('start', clear)
+            .on("brush", updateChart2));
     }
 
     //TODO: Barchart with counts of different species
@@ -257,15 +259,14 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call to removes existing brushes
     function clear() {
+        // svg1.call(brush1.move, null);
         svg1.call(brush1.move, null);
-
-        //TODO: add code to clear existing brush from svg2
+        // //TODO: add code to clear existing brush from svg2
         svg2.call(brush2.move, null);
     }
 
     // Call when Scatterplot1 is brushed
     function updateChart1(brushEvent) {
-        // clear();
 
         //TODO: Find coordinates of brushed region
 
@@ -286,7 +287,6 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Call when Scatterplot2 is brushed
     function updateChart2(brushEvent) {
-        // clear();
 
         //TODO: Find coordinates of brushed region
         let coordinates = d3.brushSelection(this);
