@@ -53,8 +53,8 @@ d3.csv("data/iris.csv").then((data) => {
 
     // Scatterplot1
     {
-        let xKey1 = "Sepal_Length";
-        let yKey1 = "Petal_Length";
+        xKey1 = "Sepal_Length";
+        yKey1 = "Petal_Length";
 
         // Find max x
         let maxX1 = d3.max(data, (d) => {
