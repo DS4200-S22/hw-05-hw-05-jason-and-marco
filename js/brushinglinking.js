@@ -10,11 +10,11 @@ const svg1 = d3.select("#vis-holder")
     .attr("height", height - margin.top - margin.bottom)
     .attr("viewBox", [0, 0, width, height]);
 
-// Initialize brush for Scatterplot1 and points. We will need these to be global. 
+// Initialize brush for Scatterplot1 and points globally
 let brush1;
 let myCircles1;
 
-//TODO: append svg object to the body of the page to house Scatterplot2 (call it svg2)
+// Append svg object to the body of the page to house Scatterplot2
 
 const svg2 = d3.select("#vis-holder")
     .append("svg")
@@ -22,19 +22,19 @@ const svg2 = d3.select("#vis-holder")
     .attr("height", height - margin.top - margin.bottom)
     .attr("viewBox", [0, 0, width, height]);
 
-//TODO: Initialize brush for Scatterplot2 and points. We will need these to be global.
+// Initialize brush for Scatterplot2 and  globally
 let brush2;
 let myCircles2;
 
-//TODO: append svg object to the body of the page to house bar chart
+// Append svg object to the body of the page to house bar chart
 const svg3 = d3.select("#vis-holder")
     .append("svg")
     .attr("width", width - margin.left - margin.right)
     .attr("height", height - margin.top - margin.bottom)
     .attr("viewBox", [0, 0, width, height]);
 
-//TODO: Initialize bars. We will need these to be global.
-let bars
+// Initialize bars globally
+let bars;
 
 
 // Define color scale
@@ -42,7 +42,7 @@ const color = d3.scaleOrdinal()
     .domain(["setosa", "versicolor", "virginica"])
     .range(["#FF7F50", "#21908dff", "#fde725ff"]);
 
-// Plotting 
+// Reading in plotting data
 d3.csv("data/iris.csv").then((data) => {
 
     // We will need scales for all of the following charts to be global
