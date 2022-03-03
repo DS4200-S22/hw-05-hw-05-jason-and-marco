@@ -1,8 +1,9 @@
-
+/* Make body font Arial */
 body {
   font-family: Arial;
 }
 
+/* Add thick black outline to selected elements */
 .selected {
   opacity: 1 !important;
   stroke: black;
